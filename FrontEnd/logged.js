@@ -1,4 +1,5 @@
-function genererFiches (data){
+function genererFiches(data){
+
     for(let i = 0; i < data.length; i++){
     
     const figure = data[i]
@@ -26,7 +27,6 @@ function genererCategories(data){
     optionsCategories.value = categories.id;
     const idCategories = document.createElement("option");
     idCategories.innerHTML = categories.id;
-
     categorie.appendChild(optionsCategories)
 }}
 
@@ -49,33 +49,37 @@ function genererFichesModale(data){
             fichesModale.appendChild(fichesElement);
             fichesElement.appendChild(imgElement);
             fichesElement.appendChild(trashDiv)
-            trashDiv.appendChild(trashElement)
-
-            // Suppression d'un travail
-            trashDiv.addEventListener("click",async function(event){
-                event.preventDefault();
-                const id = figure.id;
-                const tokenStock = localStorage.getItem("token");
-                const response = await fetch("http://localhost:5678/api/works/" + id,
-            {  
-            method :"DELETE",
-            headers:{"Authorization":`Bearer ${tokenStock}`},
-                });
-            if(response.status =="401"){
-                document.location.href="login.html"
-            }
-
-            });
+            trashDiv.appendChild(trashElement)    
             
-}}
+            //Suppression d'un travail
+    trashDiv.addEventListener("click",async function(event){
+        event.preventDefault();
+    const id = figure.id;
+    const tokenStock = localStorage.getItem("token");
+
+    const response = await fetch("http://localhost:5678/api/works/" + id,
+    {   method :"DELETE",
+    headers:{"Authorization":`Bearer ${tokenStock}`},
+    });
+
+    console.log(response.status)
+
+    if(response.status =="204"){
+        const fichesModale = document.querySelector(".modale-gallery");
+        fichesModale.innerHTML = "";
+        const fiches = document.querySelector(".gallery");
+        fiches.innerHTML = "";
+        fetchData();
+    } else if (response.status =="401")
+    document.location.href="login.html"
+    });
+    }} 
 
 async function fetchData() {
     const response = await fetch("http://localhost:5678/api/works");
     const travaux = await response.json();
-
     genererFiches(travaux)
     genererFichesModale(travaux)
-
 }
 
 fetchData()
@@ -89,8 +93,14 @@ async function fetchCategorie(){
 
 fetchCategorie()
 
-
-
+const modale = document.querySelector(".modale-open")
+const overlay = document.querySelector(".overlay")
+const fenetreModale = document.querySelector(".modale")
+const modaleClose = document.querySelector(".modale-close")
+const ajoutPhoto = document.querySelector(".add-photo")
+const fenetreModaleAjout = document.querySelector(".modale-photo")
+const modaleClosePhoto = document.querySelector(".modale-photo-close")
+const modaleReturn = document.querySelector(".modale-photo-return")
 
 const boutonPhoto = document.querySelector(".ajout-photo-bouton")
 boutonPhoto.addEventListener("click", function(){
@@ -121,16 +131,14 @@ icone.addEventListener("click", function(){
 // Ajout d'un travail
 
     const valider = document.querySelector("form");
-     valider.addEventListener("submit", async function(event){
+     valider.addEventListener("submit", async function(event)
+     {
         event.preventDefault();
-        event.stopPropagation();
 
         let imageFile = document.getElementById("photo-file");
-        console.log(imageFile.files[0].size)
         if(imageFile.files[0].size <= 4*1024*1024 ){
         let reg = new RegExp("^[^ ]");
         let isValid = reg.test(document.querySelector("#titre-photo").value.trim())
-        console.log(isValid)
         if(isValid){
        const formulaire = new FormData()
             formulaire.append("title",event.target.querySelector("#titre-photo").value);
@@ -145,23 +153,24 @@ icone.addEventListener("click", function(){
             headers:{"Authorization":`Bearer ${tokenStock}`},
             body: formulaire
         })
-        if (response.status == "401"){
+        console.log(response.status)
+        if (response.status == "201"){
+            const fichesModale = document.querySelector(".modale-gallery");
+            fichesModale.innerHTML = "";
+            const fiches = document.querySelector(".gallery");
+            fiches.innerHTML = "";
+            fetchData()
+            retourModale()} 
+        else if (response.status == "401"){
             document.location.href ="login.html"
         }
         } else { window.alert("Le titre ne contient que des espaces")}
             } else {
             window.alert("Le fichier est trop volumineux")
             }
-        })
+    })
 
-const modale = document.querySelector(".modale-open")
-const overlay = document.querySelector(".overlay")
-const fenetreModale = document.querySelector(".modale")
-const modaleClose = document.querySelector(".modale-close")
-const ajoutPhoto = document.querySelector(".add-photo")
-const fenetreModaleAjout = document.querySelector(".modale-photo")
-const modaleClosePhoto = document.querySelector(".modale-photo-close")
-const modaleReturn = document.querySelector(".modale-photo-return")
+
 
 function afficherModale (){
     fenetreModale.classList.add("active");
