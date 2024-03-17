@@ -1,6 +1,5 @@
 // Fonction permettant de générer les fiches des travaux
 function genererFiches(data) {
-
     for (let i = 0; i < data.length; i++) {
         const fichesTravaux = document.querySelector(".gallery")
         const fichesElement = document.createElement("figure")
