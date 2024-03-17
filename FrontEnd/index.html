@@ -10,15 +10,20 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="travaux.js"></script>
+	<script src="index.js" defer></script>
+	<script src="utilisateur.js" defer></script>
+	<script src="modale.js" defer></script>
 </head>
 <body>
+<div class="overlay"></div>
+<div class="bandeau"><img src="../FrontEnd/assets/icons/VectorModifierNeg.png" alt="edition">Mode édition</div>
 <header>
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
 			<li>projets</li>
 			<li>contact</li>
-			<li><a href="login.html">login</a></li>
+			<li id="log"></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -37,59 +42,69 @@
 	</div>
 	
 	<div class="portfolio">
-		<h2>Mes Projets</h2> 
-		<div class="boutons">
-		<button class="btn-tous">Tous</button>
-		<button class="btn-objets">Objets</button>
-		<button class="btn-appartements">Appartements</button>
-		<button class="btn-hotrest">Hôtels et restaurants</button>
+		<div class="projets">
+            <div class="titre" id="instagram"><h2>Mes Projets</h2></div>
+            <div class="modale-open"><a href="#"><img src="../FrontEnd/assets/icons/Vectormodifier.png" alt="Modifier"></a>Modifier</div>
+        </div>
+
+		<div class="boutons" id="boutons"> 
 		</div>
+
 		<div class="gallery">
-			<!-- <figure>
-				<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
-				<figcaption>Abajour Tahina</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-v.png" alt="Appartement Paris V">
-				<figcaption>Appartement Paris V</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/restaurant-sushisen-londres.png" alt="Restaurant Sushisen - Londres">
-				<figcaption>Restaurant Sushisen - Londres</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/la-balisiere.png" alt="Villa “La Balisiere” - Port Louis">
-				<figcaption>Villa “La Balisiere” - Port Louis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/structures-thermopolis.png" alt="Structures Thermopolis">
-				<figcaption>Structures Thermopolis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-x.png" alt="Appartement Paris X">
-				<figcaption>Appartement Paris X</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/le-coteau-cassis.png" alt="Pavillon “Le coteau” - Cassis">
-				<figcaption>Pavillon “Le coteau” - Cassis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/villa-ferneze.png" alt="Villa Ferneze - Isola d’Elba">
-				<figcaption>Villa Ferneze - Isola d’Elba</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-xviii.png" alt="Appartement Paris XVIII">
-				<figcaption>Appartement Paris XVIII</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/bar-lullaby-paris.png" alt="Bar “Lullaby” - Paris">
-				<figcaption>Bar “Lullaby” - Paris</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi">
-				<figcaption>Hotel First Arte - New Delhi</figcaption>
-			</figure> -->
 		</div>
+
+        <div class="modale">
+            <button class="modale-close"><img src="../FrontEnd/assets/icons/xmarkclose.png" alt="croix"></button>
+            <div class="modale-header">
+                    Galerie photo
+            </div>
+            <div class="modale-body">
+                <div class = "modale-gallery">
+                </div>
+            </div>
+            <div class="modale-footer">
+                <button class="add-photo"> Ajouter une photo </button>
+            </div>
+        </div>
+
+		<div class="modale-photo">
+			<button class="modale-photo-close"><img src="../FrontEnd/assets/icons/xmarkclose.png" alt="Croix"></button>
+			<button class="modale-photo-return"><img src="../FrontEnd/assets/icons/arrow-leftreturn.png" alt="Fleche retour" class="return"></button>
+			<div class="modale-photo-header">
+					Ajout photo
+			</div>
+			<div class="modale-photo-body">
+				<form action="#" method="post">
+					<div class="ajout-photo">
+						<div class="icone-png">
+							<img src="../FrontEnd/assets/icons/iconePNG.png" alt ="icone PNG">
+						</div>
+						<div class="ajout-photo-bouton">
+							<div class="ajout-photo-bouton-text"><label>+ Ajouter photo</label></div>
+							<input type="file" name="photo-file" id="photo-file" required accept=".jpg, .jpeg, .png" hidden>
+						</div>
+						<div class="requirements">jpg, png : 4 Mo Max.</div>
+						<div class="photo-loaded"></div>
+					</div>
+					<div class="titre">
+						<div><label>Titre</label></div>
+						<div class="titre-champs"><input type="text" name="titre-photo" id="titre-photo" required minlength="4" maxlength="40"></div>
+					</div>
+					<div class="caterogie">
+					<label>Catégorie</label>
+
+					<select name="categorie" id="categorie" required>
+					</select>
+
+					</div>	
+			
+					<div class="modale-photo-footer">
+					<input type="submit" value="Valider">
+					</div>
+				</form>
+			</div>		
+		</div>
+
 	</div>
 
 	<section class="contact">

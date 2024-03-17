@@ -9,6 +9,9 @@
         <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
         <meta name="description" content="">
         <link rel="stylesheet" href="./assets/style.css">
+        <script src="travaux.js" defer></script>
+        <script src="index.js" defer></script>
+        <script src="utilisateur.js" defer></script>
         <script src="login.js" defer></script>
     </head>
     <body>
@@ -18,7 +21,7 @@
             <ul>
                 <li><a href="index.html">projets</a></li>
                 <li>contact</li>
-                <li>login</li>
+                <li id="log"></li>
                 <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
             </ul>
         </nav>
@@ -27,7 +30,7 @@
     
         <section id="connexion">
         <h2>Log In</h2>
-        <form action="logged.html" method="post">
+        <form action="index.html" method="post">
             <label>E-mail</label>
             <input type="email" name="e-mail" id="e-mail" required>
             <label>Mot de passe</label>
