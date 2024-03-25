@@ -149,6 +149,7 @@ li:hover {
 
 #boutons.active{
 	display: flex;
+	
 }
 
 #boutons{
@@ -161,7 +162,7 @@ li:hover {
 	margin-top: 0px;
 }
 
-#boutons #btn-tous{
+#boutons button.active{
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -428,6 +429,10 @@ footer nav ul {
 	opacity: 0.8;
 }
 
+.modale-photo-footer.active input:hover{
+	background:#1D6154;
+	border: #1D6154;
+}
 .modale-body{
 margin-left : 105px;
 margin-right: 105px;;

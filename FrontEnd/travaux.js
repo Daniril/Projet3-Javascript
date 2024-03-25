@@ -91,11 +91,13 @@ function genererBoutonsTri(data) {
     const boutonTous = document.createElement("button");
     boutonTous.innerHTML = "Tous";
     boutonTous.setAttribute("id", "btn-tous");
+    boutonTous.setAttribute("class", "active");
     boutons.appendChild(boutonTous);
     // Boucle FOR pour générer les boutons depuis l'API
     for (let i = 0; i < data.length; i++) {
         const boutonsTri = document.createElement("button");
         boutonsTri.setAttribute("data-id", data[i].id);
+        boutonsTri.setAttribute('class', 'inactive');
         boutonsTri.innerHTML = data[i].name;
         boutons.appendChild(boutonsTri);
     }
@@ -106,6 +108,9 @@ function triImages() {
     const boutonsTri = document.querySelectorAll("#boutons button");
     for (let boutonTri of boutonsTri) {
         boutonTri.addEventListener("click", function () {
+            boutonsTri.forEach((e) => cacherElement(e));
+            boutonTri.classList.add('active');
+            // Tri des travaux
             let id = boutonTri.dataset.id;
             let figures = document.querySelectorAll(".gallery figure");
             for (let figure of figures) {

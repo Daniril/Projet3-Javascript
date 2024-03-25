@@ -99,7 +99,9 @@ valider.addEventListener("submit", async function(event){
         window.alert("Le titre ne contient que des espaces");
         return;
     }
-
+    console.log(photoTitre.value);
+    console.log(photo.files[0]);
+    console.log(document.querySelector("#categorie").value);
     // Formulaire pour envoi à l'API
     const formulaire = new FormData();
     formulaire.append("title", photoTitre.value);
@@ -127,4 +129,12 @@ valider.addEventListener("submit", async function(event){
         // Si token expiré et utilisateur plus authentifié, redirection vers le login pour mettre à jour le token
         document.location.href = "login.html";
     }
+    
 });
+
+document.querySelector('.modale-photo-footer').addEventListener('mouseenter', function(e){
+    e.stopPropagation;
+    if(photoTitre.value != undefined && photo.files[0] != undefined && Number(document.querySelector("#categorie").value) != undefined){
+        document.querySelector('.modale-photo-footer').classList.add('active');
+    }
+})
